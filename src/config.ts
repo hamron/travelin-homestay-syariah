@@ -14,7 +14,7 @@ export const site = {
     'dan ramah keluarga muslim — dilengkapi arah kiblat, perlengkapan salat, ' +
     'dan lingkungan yang tenang.',
 
-  url: 'https://travelinhomestaysyariah.web.id',
+  url: 'https://travelinnhomestayborobudur.web.id',
 
   // 0812-3153-8282 dalam format internasional
   whatsapp: '6281231538282',
