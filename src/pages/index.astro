@@ -6,13 +6,14 @@ import FormPemesanan from '../components/FormPemesanan.astro';
 import { site, linkWhatsApp, linkPetaEmbed, linkGoogleMaps } from '../config';
 import { daftarKamar, formatRupiah } from '../data/kamar';
 import { daftarFasilitas } from '../data/fasilitas';
+import { daftarPaketWisata } from '../data/paketWisata';
 
 const hargaTerendah = Math.min(...daftarKamar.map((k) => k.hargaPerMalam));
 const waUmum = linkWhatsApp(`Halo ${site.namaPendek}, saya ingin bertanya soal ketersediaan kamar.`);
 const nomorTelepon = site.telepon.replace(/[^\d+]/g, '');
 ---
 
-<Layout>
+<Layout gambar="/hero.jpg">
   <Header slot="header" />
 
   {/* ============ HERO ============ */}
@@ -52,12 +53,14 @@ const nomorTelepon = site.telepon.replace(/[^\d+]/g, '');
         </p>
       </div>
 
-      {/* TODO: ganti dengan foto asli, simpan sebagai public/hero.jpg */}
       <div class="aspect-4/3 w-full overflow-hidden rounded-2xl border border-ink-200 bg-brand-100 shadow-xl">
-        <div class="flex h-full flex-col items-center justify-center gap-1 text-center text-sm text-brand-700">
-          <span>Foto utama homestay</span>
-          <span class="text-xs text-brand-600">simpan di public/hero.jpg</span>
-        </div>
+        <img
+          src="/hero.jpg"
+          alt={site.nama}
+          width="1200"
+          height="900"
+          class="h-full w-full object-cover"
+        />
       </div>
     </div>
   </section>
@@ -212,6 +215,56 @@ const nomorTelepon = site.telepon.replace(/[^\d+]/g, '');
     prev?.addEventListener('click', () => scrollByCard(-1));
     next?.addEventListener('click', () => scrollByCard(1));
   </script>
+
+  {/* ============ PAKET WISATA ============ */}
+  <section id="paket-wisata" class="bg-ink-50">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <div class="text-center">
+        <p class="relative mx-auto inline-block px-14 text-sm font-bold tracking-wide text-brand-600 uppercase">
+          <span class="absolute top-1/2 left-0 h-0.5 w-11 -translate-y-1/2 bg-brand-600" aria-hidden="true"></span>
+          Jelajah Borobudur
+          <span class="absolute top-1/2 right-0 h-0.5 w-11 -translate-y-1/2 bg-brand-600" aria-hidden="true"></span>
+        </p>
+        <h2 class="mt-2 font-display text-3xl font-bold text-ink-900">
+          Paket <span class="text-brand-600 uppercase">Wisata</span>
+        </h2>
+      </div>
+
+      <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+        {daftarPaketWisata.map((paket) => (
+          <li class="flex flex-col overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+            <img
+              src={paket.gambar}
+              alt={paket.nama}
+              width="1200"
+              height="675"
+              class="aspect-video w-full bg-brand-100 object-cover"
+            />
+            <div class="flex flex-1 flex-col justify-between p-6">
+              <div>
+                <h3 class="font-display text-xl font-bold text-ink-900">{paket.nama}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-ink-600">{paket.deskripsi}</p>
+              </div>
+              <div class="mt-5 flex items-center justify-between gap-4">
+                <p class="text-lg font-bold text-ink-900">
+                  {formatRupiah(paket.harga)}
+                  <span class="block text-xs font-normal text-ink-600">{paket.satuan}</span>
+                </p>
+                <a
+                  href={linkWhatsApp(`Halo ${site.namaPendek}, saya ingin tanya soal ${paket.nama}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="rounded-sm bg-brand-600 px-5 py-2.5 text-xs font-bold tracking-widest whitespace-nowrap text-ink-900 uppercase transition-colors hover:bg-brand-500"
+                >
+                  Tanya
+                </a>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
   {/* ============ LOKASI ============ */}
   <section id="lokasi" class="mx-auto max-w-6xl px-4 py-14 sm:px-6">

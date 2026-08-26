@@ -11,8 +11,7 @@ export const site = {
   tagline: 'Homestay syariah yang tenang di Borobudur',
   deskripsi:
     'Homestay syariah di kawasan Candi Borobudur, Magelang. Bersih, nyaman, ' +
-    'dan ramah keluarga muslim — dilengkapi arah kiblat, perlengkapan salat, ' +
-    'dan lingkungan yang tenang.',
+    'dan ramah keluarga muslim, dengan lingkungan yang tenang.',
 
   url: 'https://travelinnhomestayborobudur.web.id',
 
@@ -23,16 +22,15 @@ export const site = {
   email: 'travelinnhomestayborobudur@gmail.com',
 
   alamat: {
-    jalan: 'Jl. Badrawati',           // TODO: alamat jalan lengkap + nomor
-    kelurahan: 'Borobudur',           // TODO: nama dusun/kelurahan
+    jalan: 'Belakang Musholla Candi Mendut, Lingk. Mendut II RT 001 RW 004',
+    kelurahan: 'Mendut, Kec. Mungkid',
     kota: 'Magelang',
     provinsi: 'Jawa Tengah',
     kodePos: '56553',                 // TODO: pastikan kode pos benar
     negara: 'ID',
   },
 
-  // TODO: belum data asli — pastikan lewat Google Maps, cari lokasi, klik kanan > salin koordinat
-  koordinat: { lat: -7.604314285523657, lng: 110.2295699954562 },
+  koordinat: { lat: -7.604381653749866, lng: 110.22954893436598 },
 
   /**
    * Kosongkan untuk memakai peta otomatis dari koordinat di atas.
@@ -43,6 +41,9 @@ export const site = {
 
   /** Membuka kotak bintang Google langsung, tamu tidak perlu cari-cari */
   linkReviewGoogle: 'https://g.page/r/Cb68j4IyVH_xEBM/review',
+
+  /** Place ID listing Google Bisnis — dipakai agar "Buka di Google Maps" membuka halaman bisnis asli (rating, ulasan), bukan sekadar titik koordinat */
+  placeIdGoogleMaps: 'ChIJmQEJBJyNei4RvryPgjJUf_E',
 
   sosial: {
     instagram: '', // TODO
@@ -77,7 +78,7 @@ export function linkPetaEmbed(): string {
   return `https://www.google.com/maps?q=${site.koordinat.lat},${site.koordinat.lng}&z=16&output=embed`;
 }
 
-/** Link untuk buka lokasi ini langsung di Google Maps */
+/** Link untuk buka halaman bisnis ini langsung di Google Maps (bukan sekadar titik koordinat) */
 export function linkGoogleMaps(): string {
-  return `https://www.google.com/maps?q=${site.koordinat.lat},${site.koordinat.lng}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.nama)}&query_place_id=${site.placeIdGoogleMaps}`;
 }
