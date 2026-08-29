@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { site, linkWhatsApp } from '../../config';
-import { daftarKamar, formatRupiah } from '../../data/kamar';
+import { daftarKamar } from '../../data/kamar';
 
 export function getStaticPaths() {
   return daftarKamar.map((kamar, index) => ({
@@ -85,9 +85,7 @@ const spesifikasi = [
     )}
 
     <div class="mt-10 flex flex-wrap items-center gap-6 border-t border-ink-200 pt-8">
-      <p class="text-2xl font-bold text-ink-900">
-        {formatRupiah(kamar.hargaPerMalam)}<span class="text-sm font-normal text-ink-600">/malam</span>
-      </p>
+      <p class="text-sm text-ink-600">Hubungi kami untuk info harga terbaru</p>
       <a
         href={waPesan}
         target="_blank"

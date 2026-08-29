@@ -1,8 +1,13 @@
 /**
- * Daftar kamar. Nanti file ini bisa dipindah ke CMS supaya
- * bisa diedit lewat halaman /admin tanpa menyentuh kode.
+ * Daftar kamar. Nanti file ini bisa dipindah ke CMS supaya bisa diedit
+ * lewat halaman admin konten tanpa menyentuh kode (belum dibangun — beda
+ * dengan /admin yang ada sekarang, yang khusus catat reservasi).
  *
  * hargaPerMalam masih harga sementara — ganti dengan harga asli.
+ *
+ * PENTING: kalau `id` di sini diganti/ditambah/dihapus, perbarui juga
+ * src/lib/properti.ts — form reservasi di /admin memakai daftar itu, dan
+ * kalau id-nya beda maka status "Penuh" di halaman depan tidak akan cocok.
  */
 
 export interface Kamar {

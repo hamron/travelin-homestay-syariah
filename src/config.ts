@@ -11,7 +11,7 @@ export const site = {
   tagline: 'Homestay syariah yang tenang di Borobudur',
   deskripsi:
     'Homestay syariah di kawasan Candi Borobudur, Magelang. Bersih, nyaman, ' +
-    'dan ramah keluarga muslim, dengan lingkungan yang tenang.',
+    'dengan lingkungan yang tenang.',
 
   url: 'https://travelinnhomestayborobudur.web.id',
 
