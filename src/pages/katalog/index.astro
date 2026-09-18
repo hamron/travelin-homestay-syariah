@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { site, linkWhatsApp } from '../../config';
+import { daftarKamar } from '../../data/kamar';
+import { daftarKamarKatalog, videoYoutubeHalaman } from '../../data/katalog';
+
+// Gabungkan data katalog dengan kamar.ts untuk yang punya kamarId,
+// pakai field manual untuk yang belum ada di kamar.ts (mis. Kamar 7).
+const kamarKatalog = daftarKamarKatalog.map((k) => {
+  const sumber = k.kamarId ? daftarKamar.find((d) => d.id === k.kamarId) : undefined;
+  return {
+    nomor: k.nomor,
+    nama: `Kamar ${k.nomor}`,
+    deskripsi: sumber?.deskripsi ?? k.deskripsi ?? 'Deskripsi belum diisi.',
+    foto: sumber ? [sumber.gambar] : (k.foto ?? []),
+    kapasitas: sumber?.kapasitas ?? k.kapasitas,
+    tipeKasur: sumber?.tipeKasur ?? k.tipeKasur,
+    ukuran: sumber?.ukuran ?? k.ukuran,
+    videoYoutubeId: k.videoYoutubeId,
+  };
+});
+---
+
+<Layout judul="Katalog Kamar" noindex={true}>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
+    <p class="text-xs font-bold tracking-[0.2em] text-brand-600 uppercase">{site.namaPendek}</p>
+    <h1 class="mt-2 font-display text-3xl font-bold text-ink-900 sm:text-4xl">Katalog Kamar</h1>
+    <p class="mt-3 max-w-2xl text-base leading-relaxed text-ink-600">
+      Foto dan video tiap kamar. Untuk harga dan ketersediaan, silakan tanya langsung lewat WhatsApp.
+    </p>
+
+    <div class="mt-8 overflow-hidden rounded-xl border border-ink-200 shadow-sm">
+      <div class="grid gap-1 sm:grid-cols-2">
+        <img
+          src="/hero.jpg"
+          alt={`Tampak luar ${site.nama}`}
+          width="1600"
+          height="900"
+          class="aspect-video w-full bg-brand-100 object-cover"
+        />
+        {videoYoutubeHalaman && (
+          <div class="aspect-video w-full bg-black">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videoYoutubeHalaman}`}
+              title={`Video tampak luar ${site.nama}`}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="h-full w-full border-0"
+            />
+          </div>
+        )}
+      </div>
+      <p class="bg-white px-4 py-2 text-center text-xs font-semibold tracking-wide text-ink-600 uppercase">
+        Tampak dari luar
+      </p>
+    </div>
+
+    <div class="mt-10 space-y-12">
+      {kamarKatalog.map((kamar) => (
+        <article class="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
+          <div class="grid gap-0 sm:grid-cols-2">
+            <div class="grid grid-rows-1 gap-1 bg-ink-100 sm:grid-cols-1">
+              {kamar.foto.length > 0 ? (
+                kamar.foto.map((src) => (
+                  <img src={src} alt={kamar.nama} width="800" height="600" class="aspect-4/3 w-full object-cover" />
+                ))
+              ) : (
+                <div class="flex aspect-4/3 w-full flex-col items-center justify-center gap-1 bg-brand-100 text-center text-sm text-brand-700">
+                  <span>Foto {kamar.nama}</span>
+                  <span class="text-xs text-brand-600">simpan di public/katalog/</span>
+                </div>
+              )}
+            </div>
+
+            {kamar.videoYoutubeId ? (
+              <div class="aspect-video w-full bg-black">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${kamar.videoYoutubeId}`}
+                  title={`Video ${kamar.nama}`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="h-full w-full border-0"
+                />
+              </div>
+            ) : (
+              <div class="flex aspect-video w-full flex-col items-center justify-center gap-1 bg-ink-50 text-center text-sm text-ink-500">
+                <span>Video {kamar.nama}</span>
+                <span class="text-xs">belum ada — isi videoYoutubeId di src/data/katalog.ts</span>
+              </div>
+            )}
+          </div>
+
+          <div class="p-6">
+            <h2 class="font-display text-xl font-bold text-ink-900">{kamar.nama}</h2>
+
+            {(kamar.kapasitas || kamar.tipeKasur || kamar.ukuran) && (
+              <ul class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-600">
+                {kamar.tipeKasur && <li>{kamar.tipeKasur}</li>}
+                {kamar.kapasitas && <li>{kamar.kapasitas} Tamu</li>}
+                {kamar.ukuran && <li>{kamar.ukuran}</li>}
+              </ul>
+            )}
+
+            <p class="mt-3 text-sm leading-relaxed text-ink-600">{kamar.deskripsi}</p>
+
+            <a
+              href={linkWhatsApp(`Halo ${site.namaPendek}, saya ingin tanya soal ${kamar.nama}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex rounded-sm bg-brand-600 px-5 py-2.5 text-xs font-bold tracking-widest text-ink-900 uppercase transition-colors hover:bg-brand-500"
+            >
+              Tanya via WhatsApp
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

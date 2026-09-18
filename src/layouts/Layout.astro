@@ -7,12 +7,15 @@ interface Props {
   deskripsi?: string;
   /** Path gambar untuk pratinjau saat link dibagikan di WA/Facebook */
   gambar?: string;
+  /** Halaman yang sengaja tidak ditautkan dari mana pun (mis. /katalog) — jangan diindeks mesin pencari */
+  noindex?: boolean;
 }
 
 const {
   judul,
   deskripsi = site.deskripsi,
   gambar = '/og-image.jpg',
+  noindex = false,
 } = Astro.props;
 
 const judulLengkap = judul ? `${judul} — ${site.nama}` : `${site.nama} — ${site.tagline}`;
@@ -60,6 +63,7 @@ const schema = {
 
     <title>{judulLengkap}</title>
     <meta name="description" content={deskripsi} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.nama} />
