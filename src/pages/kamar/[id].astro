@@ -26,7 +26,11 @@ const spesifikasi = [
 ];
 ---
 
-<Layout judul={kamar.nama} deskripsi={kamar.deskripsi} gambar={kamar.gambar}>
+<Layout
+  judul={`${kamar.nama} — Syariah dekat Borobudur`}
+  deskripsi={`${kamar.deskripsi} Travelinn Homestay Syariah, Mendut, Magelang.`}
+  gambar={kamar.gambar}
+>
   <Header slot="header" />
 
   {/* ============ BREADCRUMB ============ */}
