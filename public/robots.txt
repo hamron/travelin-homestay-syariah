@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /katalog/
+Allow: /
 
 Sitemap: https://travelinnhomestayborobudur.web.id/sitemap-index.xml

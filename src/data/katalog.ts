@@ -1,7 +1,6 @@
 /**
- * Data untuk halaman katalog tersembunyi (/katalog) — dikirim ke calon tamu
- * lewat link WhatsApp langsung, TIDAK ditautkan dari mana pun di situs.
- * Sengaja tanpa harga; harga dibicarakan lewat WhatsApp.
+ * Data untuk halaman katalog (/katalog) — tampil di menu situs dan juga
+ * dibagikan lewat WhatsApp. Sengaja tanpa harga; harga dibicarakan lewat WhatsApp.
  *
  * Nomor katalog TIDAK sama urutannya dengan kamar.ts — ini daftar kamar
  * fisik (beberapa kamar bisa berbagi tipe/foto yang sama di kamar.ts, mis.
