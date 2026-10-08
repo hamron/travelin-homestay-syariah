@@ -8,10 +8,10 @@
 export const site = {
   nama: 'Travelinn Homestay Syariah Borobudur',
   namaPendek: 'Travelinn',
-  tagline: 'Homestay syariah yang tenang di Borobudur',
+  tagline: 'Homestay syariah murah dekat Candi Borobudur',
   deskripsi:
-    'Homestay syariah di kawasan Candi Borobudur, Magelang. Bersih, nyaman, ' +
-    'dengan lingkungan yang tenang.',
+    'Penginapan dan homestay syariah murah di Mendut, Mungkid, Magelang — sekitar 5 menit ' +
+    'berkendara dari Candi Borobudur. Bersih, nyaman, parkir luas, lingkungan tenang.',
 
   url: 'https://travelinnhomestayborobudur.web.id',
 
